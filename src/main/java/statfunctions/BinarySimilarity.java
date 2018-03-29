@@ -16,12 +16,11 @@ public class BinarySimilarity {
 
     @Description("Binary Similarity calculator example : statsfunctions.BinarySimilarity([2, 3], [1, 2], 'Jaccard' ) "
             + "given two collection vectors and a binary similarity function (Default to Cosine similarity), calculate Binary similarity")
-    public Map<String, Double> BinarySimilarity(
+    public Double BinarySimilarity(
             @Name("vector1") List<Object> vector1,
             @Name("vector2") List<Object> vector2,
             @Name(value = "function", defaultValue = "Cosine") String function) {
 
-        Map<String, Double> results = new HashMap<>();
 
         double a = 0d;
 
@@ -36,32 +35,19 @@ public class BinarySimilarity {
 
         switch (function) {
             case "Jaccard":
-                results.put("Jaccard", jaccard(a, b, c));
-                break;
+                return jaccard(a, b, c);
             case "Cosine":
-                results.put("Cosine", cosine(a, b, c));
-                break;
+                return cosine(a, b, c);
             case "Euclid":
-                results.put("Euclid", euclid(b, c));
-                break;
+                return euclid(b, c);
             case "Manhattan":
-                results.put("Manhattan", manhattan(b, c));
-                break;
+                return manhattan(b, c);
             case "Dice":
-                results.put("Dice", dice(a, b, c));
-                break;
-            case "All":
-                results.put("Jaccard", jaccard(a, b, c));
-                results.put("Cosine", cosine(a, b, c));
-                results.put("Euclid", euclid(b, c));
-                results.put("Manhattan", manhattan(b, c));
-                results.put("Dice", dice(a, b, c));
+                return dice(a, b, c);
 
                 default:
-                    results.put("Cosine", cosine(a, b, c));
-                    break;
+                    return cosine(a, b, c);
         }
-        return results;
     }
 
     @UserFunction
